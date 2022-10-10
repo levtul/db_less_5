@@ -1,14 +1,43 @@
 version: "3.9"
 services:
-  postgres:
+  library:
     image: postgres:latest
     environment:
-      POSTGRES_DB: "teacher"
-      POSTGRES_USER: "teacher"
-      POSTGRES_PASSWORD: "teacher"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_DB: "TULYAVKO_205"
+      POSTGRES_USER: "TULYAVKO_205"
+      POSTGRES_PASSWORD: "TULYAVKO_205"
+      PGDATA: "/var/lib/postgresql/data/library/pgdata"
     volumes:
-      - docker/db/scripts:/docker-entrypoint-initdb.d
-      - dz:/var/lib/postgresql/data
+      - ./docker/db/scripts/library:/docker-entrypoint-initdb.d
+      - ./docker/db/config/library:/var/lib/postgresql/data/library/pgdata
+      - ./dz:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+
+  hospital:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "TULYAVKO_205"
+      POSTGRES_USER: "TULYAVKO_205"
+      POSTGRES_PASSWORD: "TULYAVKO_205"
+      PGDATA: "/var/lib/postgresql/data/hospital/pgdata"
+    volumes:
+      - ./docker/db/scripts/hospital:/docker-entrypoint-initdb.d
+      - ./docker/db/config/hospital:/var/lib/postgresql/data/hospital/pgdata
+      - ./dz:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+
+  trains:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "TULYAVKO_205"
+      POSTGRES_USER: "TULYAVKO_205"
+      POSTGRES_PASSWORD: "TULYAVKO_205"
+      PGDATA: "/var/lib/postgresql/data/trains/pgdata"
+    volumes:
+      - ./docker/db/scripts/trains:/docker-entrypoint-initdb.d
+      - ./docker/db/config/trains:/var/lib/postgresql/data/trains/pgdata
+      - ./dz:/var/lib/postgresql/data
+    ports:
+      - "5430:5432"
